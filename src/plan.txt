@@ -1,0 +1,24 @@
+<cv>
+    <general Section>
+    <Educational Experience>
+    <Practical Experience>
+</cv>
+
+<cv>
+    <Section>
+        name
+        email
+        phone
+    </Section>
+    <Section>
+        school name
+            title of study
+            date of study
+    </Section>
+    <Section>
+        company name
+            position titile
+            main task
+            date from til when
+    </Section>
+</cv>
