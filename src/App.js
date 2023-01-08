@@ -3,32 +3,49 @@ import './App.css';
 import GeneralSection from "./components/GeneralSection";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      info: { text: ''},
+      info: { 
+        name: '',
+        email: '',
+        phoneNumber: '',
+        description: ''
+      },
       cv: []
     }
   }
 
-  handleChange = (e) => {
+  logee = () => {
+    console.log(this.state.info)
+
+  }
+
+  handleChangeCV = (e) => {
     this.setState({
       info: {
-        text: e.target.value
+        ...this.state.info,
+        [e.target.name]: e.target.value,
       }
     })
   }
 
   onSubmitSection = (e) => {
     e.preventDefault();
+    this.setState({
+      cv: this.state.cv.concat(this.state.info),
+      
+    })
+    setTimeout(() => console.log(this.state.cv,), 500
+    )
     
   }
 
   render() {
     return <div id='App'>
       <div id="cv">
-        <GeneralSection onButtonClicked={this.onSubmitSection} />
+        <GeneralSection onButtonClicked={this.onSubmitSection} onChala={this.handleChangeCV} aaa={this.logee}/>
         <form id="educationSection" onSubmit={this.onSubmitSection}>
           <h2>Education Details</h2>
           <input type="text" id="companyInput" placeholder='Company' />
