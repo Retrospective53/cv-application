@@ -4,11 +4,12 @@
 
 body {
     height: 100vh;
+    margin: 0;
 }
 
 
 #cv {
-    width: 40%;
+    width: 50%;
     margin: 20px;
 }
 
@@ -19,4 +20,15 @@ body {
     flex-direction: column;
     margin-top: 30px;
     gap: 10px;
+}
+
+#App {
+    display: flex;
+    justify-content: center;
+}
+
+#displayCV {
+    height: 100vh;
+    width: 50%;
+    background-color: aqua;
 }

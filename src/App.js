@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import './App.css';
 import GeneralSection from "./components/GeneralSection";
+import WorkSection from "./components/WorkSection";
+import EducationSection from "./components/EducationSection";
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +13,8 @@ class App extends Component {
         name: '',
         email: '',
         phoneNumber: '',
-        description: ''
+        description: '',
+        
       },
       cv: []
     }
@@ -29,6 +32,14 @@ class App extends Component {
         [e.target.name]: e.target.value,
       }
     })
+    const generalName = document.getElementById(generalName);
+    const generalEmail = document.getElementById(generalEmail);
+    const generalPhoneNumber = document.getElementById(generalPhoneNumber);
+    const generalDescription = document.getElementById(generalDescription);
+    generalName.value = this.state.info.name
+    generalEmail.value = this.state.info.email
+    generalPhoneNumber.value = this.state.info.phoneNumber
+    generalDescription.value = this.state.info.description
   }
 
   onSubmitSection = (e) => {
@@ -42,28 +53,47 @@ class App extends Component {
     
   }
 
+  onEditWork = (e) => {
+    e.preventDefault();
+    this.setState({
+      info: {
+        ...this.state.info,
+        work: {
+          ...this.state.info.work,
+          [e.target.name]: [e.target.value] }
+      }
+    })
+  }
+
+  onEditEducation = (e) => {
+    e.preventDefault();
+    this.setState({
+      info: {
+        ...this.state.info,
+        education: {
+          ...this.state.info.education,
+          [e.target.name]: [e.target.value] }
+      }
+    })
+  }
+
+  deleteWork = () => {
+    delete this.state.info.work;
+  }
+
+  deleteEducation = () => {
+    delete this.state.info.education;
+  }
+
   render() {
     return <div id='App'>
       <div id="cv">
         <GeneralSection onButtonClicked={this.onSubmitSection} onChala={this.handleChangeCV} aaa={this.logee}/>
-        <form id="educationSection" onSubmit={this.onSubmitSection}>
-          <h2>Education Details</h2>
-          <input type="text" id="companyInput" placeholder='Company' />
-          <input type="text" id="positionInput" placeholder='Position'/>
-          <input type="text" id="startDateInput" placeholder='Start Date'/>
-          <input type="text" id="endDateInput" placeholder='End Date'/>
-          <input type="text" id="descriptionEduInput" placeholder='Description'/>
-          <button type='submit'>Submit</button>
-        </form>
-        <form id="workSection" onSubmit={this.onSubmitSection}>
-          <h2>Work Experience</h2>
-          <input type="text" id="programInput" placeholder='Course/Program' />
-          <input type="text" id="universityInput" placeholder='University'/>
-          <input type="text" id="startDateWorkInput" placeholder='Start Date'/>
-          <input type="text" id="endDateWorkInput" placeholder='End Date'/>
-          <input type="text" id="descriptionWorkInput" placeholder='Description'/>
-          <button type='submit'>Submit</button>
-        </form>
+        <h2>Work Experience</h2>
+        <WorkSection onChala={this.onEditWork} onButtonClicked={this.deleteWork}/>
+        <button>Add</button>
+        <h2>Education Details</h2>
+        <EducationSection onChala={this.onEditEducation} onButtonClicked={this.deleteEducation}/>
         <div id="skills">
           <h2>Skills</h2>
           <ul>
@@ -72,6 +102,16 @@ class App extends Component {
             <li>Communication</li>
           </ul>
         </div>
+      </div>
+      <div id="displayCV">
+        <div id="displayGeneral">
+          <p className="generalName">1.{this.state.info.name}</p>
+          <p className="generalEmail">2.{this.state.info.email}</p>
+          <p className="generalPhone">3.{this.state.info.phoneNumber}</p>
+          <p className="generalDescription">4.{this.state.info.description}</p>
+        </div>
+        <div id="displayWork"></div>
+        <div id="displayEducation"></div>
       </div>
     </div>
   }
